@@ -8,55 +8,55 @@ function ComputerPlay(){
 
 function PlayRound(PlayerSelection,ComputerSelection){
 
-      if (PlayerSelection == "R"){
+      if (ComputerSelection == "R"){
             
-            if (ComputerSelection == "R"){
+            if (PlayerSelection == "R" || PlayerSelection == "r"){
 
                   alert("Its a tie, computer picked Rock");
             }
-            else if(ComputerSelection == "P"){
-
-                  alert("You Lose, computer picked Paper");
-            }
-            else if(ComputerSelection == "S"){
-
-                  alert("You Win, computer picked Scissors");
-            }
-            else{
-                  alert("Selection is invalid");
-            }
-      }
-
-      if (PlayerSelection == "P"){
-            if (ComputerSelection == "P"){
-
-                  alert("Its a tie, computer picked Paper");
-            }
-            else if(ComputerSelection == "S"){
-
-                  alert("You Lose, computer picked Scissors");
-            }
-            else if(ComputerSelection == "R"){
+            else if(PlayerSelection == "P" || PlayerSelection == "p"){
 
                   alert("You Win, computer picked Rock");
             }
+            else if(PlayerSelection == "S" || PlayerSelection == "s"){
+
+                  alert("You Lose, computer picked Rock");
+            }
             else{
                   alert("Selection is invalid");
             }
       }
 
-      if (PlayerSelection == "S"){
-            if (ComputerSelection == "S"){
+      if (ComputerSelection == "P"){
+            if (PlayerSelection == "P" || PlayerSelection == "p"){
+
+                  alert("Its a tie, computer picked Paper");
+            }
+            else if(PlayerSelection == "S" || PlayerSelection == "s"){
+
+                  alert("You WIN, computer picked Paper");
+            }
+            else if(PlayerSelection == "R" || PlayerSelection == "r"){
+
+                  alert("You Lose, computer picked Paper");
+            }
+            else{
+                  alert("Selection is invalid");
+            }
+      }
+
+      if (ComputerSelection == "S"){
+            if (PlayerSelection == "S" || PlayerSelection == "s"){
 
                   alert("Its a tie, computer picked Scissors");
             }
-            else if(ComputerSelection == "R"){
+            else if(PlayerSelection == "R" || PlayerSelection == "r"){
 
-                  alert("You Lose, computer picked Rock");
+                  alert("You Win, computer picked Scissors");
             }
-            else if(ComputerSelection == "P"){
+            else if(PlayerSelection == "P" || PlayerSelection == "p"){
 
-                  alert("You Win, computer picked Paper");
+                  alert("You Lose, computer picked Scissors");
             }
             else{
                   alert("Selection is invalid");
@@ -66,9 +66,15 @@ function PlayRound(PlayerSelection,ComputerSelection){
 
 function game(){
 
+      for (let i = 0; i < 5; i++){
+
       ComputerSelection = ComputerPlay();
       PlayerSelection = prompt("Enter R,P or S");
       PlayRound(PlayerSelection,ComputerSelection)
+
+
+
+      }
 }
 
 game()
