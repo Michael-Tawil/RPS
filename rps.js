@@ -1,99 +1,138 @@
 let ComputerSelection = ["R", "P","S"];
 let PlayerSelection ;
 let Playerscore = 0;
-let Computerscore= 0;
+let Computerscore = 0;
+let i = 0;
+let sarea = document.querySelector(".mainarea");
+const content = document.createElement('p');
+content.classList.add('p');
+let restar = document.getElementById("ref");
 
+
+function getselection (){
+
+      let act = window.event ;
+      PlayerSelection = act.target;
+      return PlayerSelection.id
+}
 function ComputerPlay(){
 
       return ComputerSelection[Math.floor(Math.random()*ComputerSelection.length)];
-}
+} 
 
-function PlayRound(PlayerSelection,ComputerSelection){
+ function PlayRound(PlayerSelection,ComputerSelection){
 
       if (ComputerSelection == "R"){
             
-            if (PlayerSelection == "R" || PlayerSelection == "r"){
+            if (PlayerSelection == "rock"){
 
-                  alert("Its a tie, computer picked Rock");
+                  content.textContent = "Its a tie, computer picked Rock";
+                  
             }
-            else if(PlayerSelection == "P" || PlayerSelection == "p"){
+            else if(PlayerSelection == "paper"){
 
-                  alert("You Win, computer picked Rock");
+                  content.textContent = "You Win, computer picked Rock";
                   Playerscore++;
             }
-            else if(PlayerSelection == "S" || PlayerSelection == "s"){
+            else if(PlayerSelection == "scissors"){
 
-                  alert("You Lose, computer picked Rock");
+                  content.textContent ="You Lose, computer picked Rock";
                   Computerscore++;
             }
             else{
-                  alert("Selection is invalid");
+                  content.textContent ="Selection is invalid / try again";
             }
       }
 
       if (ComputerSelection == "P"){
-            if (PlayerSelection == "P" || PlayerSelection == "p"){
+            if (PlayerSelection == "paper"){
 
-                  alert("Its a tie, computer picked Paper");
+                  content.textContent ="Its a tie, computer picked Paper";
+                  
             }
-            else if(PlayerSelection == "S" || PlayerSelection == "s"){
+            else if(PlayerSelection == "scissors"){
 
-                  alert("You WIN, computer picked Paper");
+                  content.textContent ="You WIN, computer picked Paper";
                   Playerscore++;
             }
-            else if(PlayerSelection == "R" || PlayerSelection == "r"){
+            else if(PlayerSelection == "rock"){
 
-                  alert("You Lose, computer picked Paper");
+                  content.textContent ="You Lose, computer picked Paper";
                   Computerscore++;
             }
             else{
-                  alert("Selection is invalid");
+                  content.textContent ="Selection is invalid / try again";
             }
       }
 
       if (ComputerSelection == "S"){
-            if (PlayerSelection == "S" || PlayerSelection == "s"){
+            if (PlayerSelection == "scissors"){
 
-                  alert("Its a tie, computer picked Scissors");
+                  content.textContent ="Its a tie, computer picked Scissors";
+                  
             }
-            else if(PlayerSelection == "R" || PlayerSelection == "r"){
+            else if(PlayerSelection == "rock"){
 
-                  alert("You Win, computer picked Scissors");
+                  content.textContent ="You Win, computer picked Scissors";
                   Playerscore++;
             }
-            else if(PlayerSelection == "P" || PlayerSelection == "p"){
+            else if(PlayerSelection == "paper"){
 
-                  alert("You Lose, computer picked Scissors");
+                  content.textContent ="You Lose, computer picked Scissors";
                   Computerscore++;
             }
             else{
-                  alert("Selection is invalid");
+                  content.textContent ="Selection is invalid / try again";
             }
       }
 
-      return Playerscore;
-      return Computerscore;
+      return {Playerscore,Computerscore};
+}
+
+function checkScore(){
+
+      if ( Computerscore > Playerscore && i == 5){
+            content.textContent = "Computer Won With " + Computerscore + " Points";
+            return true;
+      }
+      else if(Playerscore > Computerscore && i == 5){
+            content.textContent  = "You Won With " + Playerscore + " Points";
+            return true;
+      }
+      else {
+            return false;
+      }
+}
+
+function regame(){
+      
+      i=0;
+      Playerscore = 0;
+      Computerscore = 0;
+      content.remove();
 }
 
 function game(){
 
-      for (let i = 0; i < 5; i++){
+      let actr = window.event;
+      let acter = actr.target;
+      if (acter.id == "rock" || acter.id == "paper" || acter.id == "scissors"){
+      
+      let cScore = checkScore();
 
-      ComputerSelection = ComputerPlay();
-      PlayerSelection = prompt("Enter R,P or S");
-      PlayRound(PlayerSelection,ComputerSelection)
+            if (cScore == true){
 
-      }
-
-      if ( Computerscore > Playerscore){
-            alert("Computer Won With " + Computerscore + " Points");
-      }
-      else if(Playerscore > Computerscore){
-            alert("You Won With " + Playerscore + " Points");
-      }
-      else{
-            alert("Invalid Score");
-      }
+            return;
+}  
+else{
+            i++;
+            PlayRound(getselection(),ComputerPlay());
+            sarea.append(content);
+            console.log(i);
+            
 }
-
-game()
+}
+}
+window.addEventListener('click', game);
+window.addEventListener('click', checkScore);
+restar.addEventListener('click', regame);
